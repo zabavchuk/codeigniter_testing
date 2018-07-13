@@ -7,7 +7,19 @@ class My_Site extends CI_Controller {
 
         $this->home();
     }
-
+	public function login(){
+		$this->load->view("login");
+	}
+	public function login_validation(){
+		$this->load->library("form_validation");
+		$this->form_validation->set_rules('email', 'Email', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required|md5');
+		if($this->form_validation->run()){
+			redirect(main/members);
+		}
+		else {$this->load->view("login");}
+	}
+	
     public function home(){
         $this->myStuff();
         $this->getValues();
